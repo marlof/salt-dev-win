@@ -2,3 +2,8 @@
 base:
   '*':
     - iis
+
+  # any windows machine server or client
+  'os:Windows':
+    - match: grain
+    - states.chocolatey
