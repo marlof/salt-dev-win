@@ -20,3 +20,22 @@ UpdateEnabled=”True”
 ENU="True"
 UpdateSource=”c:\db01\DBAUpdates”
 INDICATEPROGRESS=”False”
+
+
+; Full unattended installation example, showing all required parameters:
+
+
+;setup.exe /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /PID=<validpid> /FEATURES=SQL,AS,RS,IS,Tools
+;/INSTANCENAME=MSSQLSERVER /SQLSVCACCOUNT="MyDomain\MyAccount"
+;/SQLSVCPASSWORD="************" /SQLSYSADMINACCOUNTS="MyDomain\MyAccount "
+;/AGTSVCACCOUNT="MyDomain\MyAccount" /AGTSVCPASSWORD="************"
+;/ASSVCACCOUNT="MyDomain\MyAccount" /ASSVCPASSWORD="************"
+;/RSSVCACCOUNT="MyDomain\MyAccount" /RSSVCPASSWORD="************"
+;/ISSVCAccount="MyDomain\MyAccount" /ISSVCPASSWORD="************"
+;/ASSYSADMINACCOUNTS="MyDomain\MyAccount"
+
+;or
+
+;PS
+
+;salt-call --local cmd.run $REPO'/'$MSSQL_VERSION' /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /PID=<validpid> /FEATURES=SQL,AS,RS,IS,Tools      /INSTANCENAME=MSSQLSERVER ; /SQLSVCACCOUNT="LocalHost\Administrator" /SQLSVCPASSWORD="changeme123"'
