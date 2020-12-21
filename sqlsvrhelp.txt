@@ -295,3 +295,6 @@ setup.exe /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /PID=<validpid> /FEAT
 /RSSVCACCOUNT="MyDomain\MyAccount" /RSSVCPASSWORD="************"
 /ISSVCAccount="MyDomain\MyAccount" /ISSVCPASSWORD="************"
 /ASSYSADMINACCOUNTS="MyDomain\MyAccount"
+
+
+; .\Setup.exe /IACCEPTSQLSERVERLICENSETERMS /SQLSVCPASSWORD="mysqlpass123!" /AGTSVCPASSWORD="mysqlpass123!" /ASSVCPASSWORD="mysqlpass123!" /ISSVCPASSWORD="mysqlpass123!" /RSSVCPASSWORD="mysqlpass123!" /ConfigurationFile=C:\salt\fake_repo\config\mssqltest1.ini
