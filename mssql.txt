@@ -1,1 +1,22 @@
 C:\salt\fake_repo\exes\SQL2019-SSEI-Expr.exe /QS /ACTION=Install /FEATURES=SQLENGINE /ENU /UpdateEnabled=1 /UpdateSource="C:\db01\DBAUpdates" /INSTANCEDIR="C:\db01\MSSQLServer" /INSTANCENAME=MSSQLSERVER /SQLSVCACCOUNT="DATACOMMUNITYSQLServerEngine$" /SQLSYSADMINACCOUNTS="DATACOMMUNITYadministrator" /AGTSVCACCOUNT="DATACOMMUNITYSQLServerAgent$" /AGTSVCSTARTUPTYPE="Automatic" /BROWSERSVCSTARTUPTYPE="Disabled" /INSTALLSQLDATADIR="C:\db01\MSSQLServer" /SQLBACKUPDIR="C:\db01\SQLBackup" /SQLCOLLATION="SQL_Latin1_General_CP1_CI_AS" /SQLSVCSTARTUPTYPE="Automatic" /SQLTEMPDBDIR="C:\db01\SQLTempDB01" "C:\db01\SQLTempDB02" "C:\db01\SQLTempDB03" "C:\db01\SQLTempDB04" /SQLTEMPDBLOGDIR="C:\db01\SQLTLog" /SQLUSERDBDIR="C:\db01\SQLData00" /SQLUSERDBLOGDIR="C:\db01\SQLTLog" /SQLTEMPDBFILECOUNT=4 /IACCEPTSQLSERVERLICENSETERMS
+
+
+; $DIR_REPO   = "C:\salt\fake_repo\exes\"
+; $DIR_CONFIG = "C:\salt\fake_repo\config\"
+; $MSSQL_VERSION = "SQL2019-SSEI-Expr.exe | SQLEXPR_x64_ENU.exe"
+; $MSSQL_VERSION = "SQLOffline\SETUP.EXE"
+; $FILE_CONFIG   = "mssqltest1.ini"
+
+
+; E:setup.exe /ConfigurationFile=D:DBAConfigurationFile.ini /IAcceptSQLServerLicenseTerms
+; salt-call --local cmd.run $REPO'\'$MSSQL_VERSION' /ConfigurationFile='$DIR_CONFIG'\'$FILE_CONFIG'  /IAcceptSQLServerLicenseTerms'
+
+
+QUIET=”False”
+QUIETSIMPLE=”True”
+ACTION="Install"
+FEATURES="SQLENGINE"
+UpdateEnabled=”True”
+ENU="True"
+UpdateSource=”c:\db01\DBAUpdates”
+INDICATEPROGRESS=”False”
