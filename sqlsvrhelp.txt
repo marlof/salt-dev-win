@@ -298,3 +298,130 @@ setup.exe /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /PID=<validpid> /FEAT
 
 
 ; .\Setup.exe /IACCEPTSQLSERVERLICENSETERMS /SQLSVCPASSWORD="mysqlpass123!" /AGTSVCPASSWORD="mysqlpass123!" /ASSVCPASSWORD="mysqlpass123!" /ISSVCPASSWORD="mysqlpass123!" /RSSVCPASSWORD="mysqlpass123!" /ConfigurationFile=C:\salt\fake_repo\config\mssqltest1.ini
+
+
+
+
+Product Updates Selected for Installation:
+  Title:                         Microsoft SQL Server 2016  Express SP1
+  Knowledge Based Article:       KB 3182545
+  Version:                       13.1.4001.0
+  Architecture:                  x64
+  Language:                      1033
+
+  Update Source:                 Slipstream
+
+
+User Input Settings:
+  ACTION:                        Install
+  ADDCURRENTUSERASSQLADMIN:      true
+  AGTSVCACCOUNT:                 NT AUTHORITY\NETWORK SERVICE
+  AGTSVCPASSWORD:                *****
+  AGTSVCSTARTUPTYPE:             Disabled
+  ASBACKUPDIR:                   Backup
+  ASCOLLATION:                   Latin1_General_CI_AS
+  ASCONFIGDIR:                   Config
+  ASDATADIR:                     Data
+  ASLOGDIR:                      Log
+  ASPROVIDERMSOLAP:              1
+  ASSERVERMODE:                  MULTIDIMENSIONAL
+  ASSVCACCOUNT:                  <empty>
+  ASSVCPASSWORD:                 <empty>
+  ASSVCSTARTUPTYPE:              Automatic
+  ASSYSADMINACCOUNTS:            <empty>
+  ASTELSVCACCT:                  <empty>
+  ASTELSVCPASSWORD:              <empty>
+  ASTELSVCSTARTUPTYPE:           0
+  ASTEMPDIR:                     Temp
+  BROWSERSVCSTARTUPTYPE:         Disabled
+  CLTCTLRNAME:                   <empty>
+  CLTRESULTDIR:                  <empty>
+  CLTSTARTUPTYPE:                0
+  CLTSVCACCOUNT:                 <empty>
+  CLTSVCPASSWORD:                <empty>
+  CLTWORKINGDIR:                 <empty>
+  COMMFABRICENCRYPTION:          0
+  COMMFABRICNETWORKLEVEL:        0
+  COMMFABRICPORT:                0
+  CONFIGURATIONFILE:             C:\salt\fake_repo\config\mssqltest1.ini
+  CTLRSTARTUPTYPE:               0
+  CTLRSVCACCOUNT:                <empty>
+  CTLRSVCPASSWORD:               <empty>
+  CTLRUSERS:                     <empty>
+  ENABLERANU:                    true
+  ENU:                           true
+  EXTSVCACCOUNT:                 <empty>
+  EXTSVCPASSWORD:                <empty>
+  FEATURES:                      SQLENGINE, REPLICATION
+  FILESTREAMLEVEL:               0
+  FILESTREAMSHARENAME:           <empty>
+  FTSVCACCOUNT:                  <empty>
+  FTSVCPASSWORD:                 <empty>
+  HELP:                          false
+  IACCEPTROPENLICENSETERMS:      false
+  IACCEPTSQLSERVERLICENSETERMS:  true
+  INDICATEPROGRESS:              false
+  INSTALLSHAREDDIR:              C:\Program Files\Microsoft SQL Server\
+  INSTALLSHAREDWOWDIR:           C:\Program Files (x86)\Microsoft SQL Server\
+  INSTALLSQLDATADIR:             <empty>
+  INSTANCEDIR:                   C:\Program Files\Microsoft SQL Server\
+  INSTANCEID:                    <empty>
+  INSTANCENAME:                  <empty>
+  ISSVCACCOUNT:                  NT AUTHORITY\Network Service
+  ISSVCPASSWORD:                 <empty>
+  ISSVCSTARTUPTYPE:              Automatic
+  ISTELSVCACCT:                  <empty>
+  ISTELSVCPASSWORD:              <empty>
+  ISTELSVCSTARTUPTYPE:           0
+  MATRIXCMBRICKCOMMPORT:         0
+  MATRIXCMSERVERNAME:            <empty>
+  MATRIXNAME:                    <empty>
+  MRCACHEDIRECTORY:              
+  NPENABLED:                     0
+  PBDMSSVCACCOUNT:               <empty>
+  PBDMSSVCPASSWORD:              <empty>
+  PBDMSSVCSTARTUPTYPE:           0
+  PBENGSVCACCOUNT:               <empty>
+  PBENGSVCPASSWORD:              <empty>
+  PBENGSVCSTARTUPTYPE:           0
+  PBPORTRANGE:                   <empty>
+  PBSCALEOUT:                    false
+  PID:                           *****
+  QUIET:                         true
+  QUIETSIMPLE:                   false
+  ROLE:                          AllFeatures_WithDefaults
+  RSINSTALLMODE:                 DefaultNativeMode
+  RSSHPINSTALLMODE:              DefaultSharePointMode
+  RSSVCACCOUNT:                  <empty>
+  RSSVCPASSWORD:                 <empty>
+  RSSVCSTARTUPTYPE:              Automatic
+  SAPWD:                         <empty>
+  SECURITYMODE:                  <empty>
+  SQLBACKUPDIR:                  <empty>
+  SQLCOLLATION:                  SQL_Latin1_General_CP1_CI_AS
+  SQLSVCACCOUNT:                 <empty>
+  SQLSVCINSTANTFILEINIT:         false
+  SQLSVCPASSWORD:                *****
+  SQLSVCSTARTUPTYPE:             Automatic
+  SQLSYSADMINACCOUNTS:           <empty>
+  SQLTELSVCACCT:                 NT Service\SQLTELEMETRY
+  SQLTELSVCPASSWORD:             <empty>
+  SQLTELSVCSTARTUPTYPE:          Automatic
+  SQLTEMPDBDIR:                  <empty>
+  SQLTEMPDBFILECOUNT:            1
+  SQLTEMPDBFILEGROWTH:           64
+  SQLTEMPDBFILESIZE:             8
+  SQLTEMPDBLOGDIR:               <empty>
+  SQLTEMPDBLOGFILEGROWTH:        64
+  SQLTEMPDBLOGFILESIZE:          8
+  SQLUSERDBDIR:                  <empty>
+  SQLUSERDBLOGDIR:               <empty>
+  SUPPRESSPRIVACYSTATEMENTNOTICE: false
+  TCPENABLED:                    0
+  UIMODE:                        AutoAdvance
+  UpdateEnabled:                 true
+  UpdateSource:                  Slipstream
+  USEMICROSOFTUPDATE:            false
+  X86:                           false
+
+  Configuration file:            C:\Program Files\Microsoft SQL Server\130\Setup Bootstrap\Log\20201221_215732\ConfigurationFile.ini
