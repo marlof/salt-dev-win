@@ -39,3 +39,6 @@ INDICATEPROGRESS=”False”
 ;PS
 
 ;salt-call --local cmd.run $REPO'/'$MSSQL_VERSION' /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /PID=<validpid> /FEATURES=SQL,AS,RS,IS,Tools      /INSTANCENAME=MSSQLSERVER ; /SQLSVCACCOUNT="LocalHost\Administrator" /SQLSVCPASSWORD="changeme123"'
+
+
+; salt-call --local cmd.run 'C:\salt\fake_repo\exes\SQLOffline\Setup.exe /QS /IACCEPTSQLSERVERLICENSETERMS /SQLSVCPASSWORD="mysqlpass123!" /ConfigurationFile=C:\salt\fake_repo\config\mssqltest2.ini'
