@@ -14,6 +14,8 @@ salt-call grains.get locale_info:defaultlanguage
 
 salt-call grains.get locale_info
 
+salt-call pkg.refresh_db
+
 salt-call cp.list_master | more
 
 salt-call state.sls mssql -l debug
