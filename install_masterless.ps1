@@ -1,6 +1,12 @@
 #==============================================================================
+# You may need to change the execution policy in order to run this script
+# Run the following in powershell:
 #
-#          FILE: install_masterless.ps1
+# Set-ExecutionPolicy RemoteSigned
+#
+#==============================================================================
+#
+#          FILE: install_salt.ps1
 #
 #   DESCRIPTION: Salt Installation for Windows
 #       AUTHOR : Marc Loftus (webmarcit)
@@ -10,22 +16,27 @@
 $saltversion = "Salt-Minion-3002.2-Py3-AMD64-Setup.exe"
 
 $dir_source      = "https://repo.saltstack.com/windows/$saltversion"
-$dir_destination = "c:\test\"
+$dir_destination = "c:\salt\exe\"
 $destination     = "$dir_destination$saltversion"
 
+$salt            = "C:\salt\salt-call.bat"
+$testfile        = "C:\salt\uninst.exe"
+
 clear
-Write-Output "Running $(ScriptName)..."
-Write-Output "====================================================================================="
-Write-Output ""
-Write-Output "  Download $dir_destination$saltversion"
-Write-Output ""
-Write-Output ""
-Write-Output "====================================================================================="
-Write-Output ""
-Write-Output "  $(ScriptName) - Salt Minion Installation"
-Write-Output "  $saltversion"
-Write-Output ""
-Write-Output "====================================================================================="
+Write-Output "
+Running $(ScriptName)...
+=====================================================================================
+
+  Download $dir_destination$saltversion
+
+
+=====================================================================================
+
+  $(ScriptName) - Salt Minion Installation
+  $saltversion
+
+=====================================================================================
+"
 Write-Output ""
 
 
@@ -96,8 +107,8 @@ Function CreateFolder($path) {
 #==============================================================================
 Function GetUrl($src, $dest) { 
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-  Write-Host "Download: $src"
-  Write-Host "Target: $dest"
+  Write-Host "Downloading : $src"
+  Write-Host "Target      : $dest"
    Invoke-WebRequest -Uri $src -OutFile $dest
 }
 
@@ -113,15 +124,54 @@ If (($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
   CreateFolder "$dir_destination"
   #Set-Location $dir_destination 
 
-  GetUrl  $source $destination
-  Write-Output "  $destination /S /master=localhost /minion-name=%COMPUTERNAME%"
-  iex "$destination /S /master=localhost /minion-name=%COMPUTERNAME%"
+  If (Test-Path $destination -PathType Leaf) {
+    Write-Output "
+      May already be downloaded.
+      Check md5."
+  } Else {
+    GetUrl  $source $destination
+    Write-Output "  $destination /S /master=localhost /minion-name=%COMPUTERNAME%"
+
+
+  }
+
+  iex "$destination /S /master=localhost /minion-name=marc-minion"
 
 } Else {
   Write-Output "You must be administrator to run this script."
 
-
 }
 
+Write-Host -NoNewline  "Installing..."
+  
+Start-Sleep -Seconds 10
+
+while (!(Test-Path "$testfile")) { 
+  Write-Host  -NoNewline "."
+  Start-Sleep -Seconds 10
+}
+
+
+
+
+Write-Output "
+=====================================================================================
+
+ Salt Minion Installed
+
+ It may take several minutes to complete.
+ To confirm installtion run:
+
+    $salt --version
+
+ Missing options in c:\salt\conf\minion
+  Add the following....
+  x
+  y
+  z
+=====================================================================================
+"
+
+iex "$salt --version"
 
 #iex 'c:\temp\Salt-Minion-2015.5.0-AMD64-Setup.exe /S /master=salt-master /minion-name=$env:computername'
