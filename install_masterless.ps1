@@ -114,8 +114,8 @@ If (($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
   #Set-Location $dir_destination 
 
   GetUrl  $source $destination
-  Write-Output "  $destination /master=localhost /minion-name=%COMPUTERNAME%"
-  iex "$destination /master=localhost /minion-name=%COMPUTERNAME%"
+  Write-Output "  $destination /S /master=localhost /minion-name=%COMPUTERNAME%"
+  iex "$destination /S /master=localhost /minion-name=%COMPUTERNAME%"
 
 } Else {
   Write-Output "You must be administrator to run this script."
