@@ -21,22 +21,29 @@ $destination     = "$dir_destination$saltversion"
 
 $salt            = "C:\salt\salt-call.bat"
 $testfile        = "C:\salt\uninst.exe"
-
+$computername    = iex hostname
 clear
 Write-Output "
 Running $(ScriptName)...
 =====================================================================================
 
-  Download $dir_destination$saltversion
-
-
-=====================================================================================
-
   $(ScriptName) - Salt Minion Installation
-  $saltversion
+  $saltversion $computername
 
 =====================================================================================
 "
+
+#==============================================================================
+# Install
+#==============================================================================
+If (Test-Path $testfile -PathType Leaf) {
+  Write-Output "
+    May already be installed.
+    Check md5.
+"
+} Else {
+
+
 Write-Output ""
 
 
@@ -78,13 +85,13 @@ $script_path = dir "$($myInvocation.MyCommand.Definition)"
 $script_path = $script_path.DirectoryName
 
 
-Write-Output ""
-Write-Output "====================================================================================="
-Write-Output ""
-Write-Output "  $(ScriptName) - Salt Minion Installation"
-Write-Output ""
-Write-Output "====================================================================================="
-Write-Output ""
+Write-Output "
+=====================================================================================
+
+  $(ScriptName) - Salt Minion Installation
+
+=====================================================================================
+"
 
 
 #==============================================================================
@@ -109,7 +116,7 @@ Function GetUrl($src, $dest) {
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
   Write-Host "Downloading : $src"
   Write-Host "Target      : $dest"
-   Invoke-WebRequest -Uri $src -OutFile $dest
+  Invoke-WebRequest -Uri $src -OutFile $dest
 }
 
 
@@ -131,7 +138,8 @@ If (($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
   If (Test-Path $destination -PathType Leaf) {
     Write-Output "
       May already be downloaded.
-      Check md5."
+      Check md5.
+"
   } Else {
     GetUrl  $source $destination
     Write-Output "  $destination /S /master=localhost /minion-name=%COMPUTERNAME%"
@@ -146,8 +154,8 @@ If (($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
       May already be installed.
       Check md5."
   } Else {
-    iex "$destination /S /master=localhost /minion-name=marc-minion"
     Write-Host -NoNewline  "Installing..."
+    iex "$destination /S /master=localhost /minion-name=$computername-minion"
   }
 
 
@@ -160,7 +168,7 @@ If (($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
   
 while (!(Test-Path "$testfile")) { 
   Write-Host  -NoNewline "."
-  Start-Sleep -Seconds 10
+  Start-Sleep -Seconds 2
 }
 
 
@@ -183,7 +191,7 @@ Write-Output "
   z
 =====================================================================================
 "
-
+}
 iex "$salt --version"
 
 #iex 'c:\temp\Salt-Minion-2015.5.0-AMD64-Setup.exe /S /master=salt-master /minion-name=$env:computername'
