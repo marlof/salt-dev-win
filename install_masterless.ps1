@@ -124,6 +124,10 @@ If (($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
   CreateFolder "$dir_destination"
   #Set-Location $dir_destination 
 
+
+#==============================================================================
+# Download
+#==============================================================================
   If (Test-Path $destination -PathType Leaf) {
     Write-Output "
       May already be downloaded.
@@ -131,21 +135,29 @@ If (($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
   } Else {
     GetUrl  $source $destination
     Write-Output "  $destination /S /master=localhost /minion-name=%COMPUTERNAME%"
-
-
   }
 
-  iex "$destination /S /master=localhost /minion-name=marc-minion"
+
+#==============================================================================
+# Install
+#==============================================================================
+  If (Test-Path $testfile -PathType Leaf) {
+    Write-Output "
+      May already be installed.
+      Check md5."
+  } Else {
+    iex "$destination /S /master=localhost /minion-name=marc-minion"
+    Write-Host -NoNewline  "Installing..."
+  }
+
+
 
 } Else {
   Write-Output "You must be administrator to run this script."
 
 }
 
-Write-Host -NoNewline  "Installing..."
   
-Start-Sleep -Seconds 10
-
 while (!(Test-Path "$testfile")) { 
   Write-Host  -NoNewline "."
   Start-Sleep -Seconds 10
