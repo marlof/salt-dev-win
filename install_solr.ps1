@@ -202,22 +202,34 @@ while (!(Test-Path "$testfile")) {
 Write-Output "
 =====================================================================================
 
- Salt Minion Installed
-
- It may take several minutes to complete.
- To confirm installtion run:
-
-    $exe --version
-
- Missing options in c:\salt\conf\minion
-  Add the following....
-  x
-  y
-  z
-=====================================================================================
+ Solr Installed
 "
 }
-iex "$exe --version"
+
+Write-Output "
+=====================================================================================
+
+ Confirm Java installed
+
+  due to winrepo installer limitations you need to manually download the exe from
+  # http://www.java.com/en/download/manual.jsp
+  # and put it on the winrepo on master to install it the 'salt://win/repo-ng/jre8_*/...
+  # https://javadl.oracle.com/webapps/download/AutoDL?BundleId=243737_61ae65e088624f5aaa0b1d2d801acb16
+  salt-call pkg.install jre8
+"
+
+
+Write-Output "
+=====================================================================================
+
+  Test with $exe
+"
+iex "$exe"
+
+
+
+
+
 
 #iex 'c:\temp\Salt-Minion-2015.5.0-AMD64-Setup.exe /S /master=salt-master /minion-name=$env:computername'
 # Rename-Item -Path "c:\logfiles\daily_file.txt" -NewName "monday_file.txt"
