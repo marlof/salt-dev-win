@@ -19,6 +19,11 @@
 {% set zoo_logs=         salt['pillar.get']('solr:zoo_logs', "/var/zookeeper/logs") %}
 
 
+solr_temp_dir:
+  file.directory:
+    - name: {{solr_temp}}
+    - makedirs: True
+ 
  
 solr_get:
   # FIXME: Get the solr release from a location (This should be NEXUS)
