@@ -3,4 +3,4 @@
 # salt_minion_test: salt-call --local state.show_sls solr
 
 include:
-  - install.sls
+  - solr.install
