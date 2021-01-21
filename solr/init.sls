@@ -4,3 +4,5 @@
 
 include:
   - solr.install
+  - solr.projectconfig
+
