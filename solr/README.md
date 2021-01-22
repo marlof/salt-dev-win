@@ -6,5 +6,5 @@ Solr is a standalone enterprise search server with a REST-like API. You put docu
 
 | Variable | SLS | Owner | Comments | Default | env1 | env2 !
 !----------!-----!-------!----------!---------!------!------!
-| user     |     |       |          |         |      |      | 
-| port     | zookeeper | |          |         |      |      |
+| user | | | | | | | 
+| port | zookeeper | | | | | |
