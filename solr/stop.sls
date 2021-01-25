@@ -10,4 +10,4 @@
 solr_stop:
   cmd.run:
     - name: echo Stopping {{solr_install_dir}}/bin/solr.cmd
-    - name: {{solr_install_dir}}/bin/solr.cmd stop --all
+    - name: {{solr_install_dir}}/bin/solr.cmd stop -all
