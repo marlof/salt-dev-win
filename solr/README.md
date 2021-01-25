@@ -10,7 +10,7 @@ Solr is a standalone enterprise search server with a REST-like API. You put docu
 | install_dir | install | TBD |Location of installation | C:/solr | |
 | ver | install | TBD | The version of solr to install| 7.7.3 | |
 | url | install | TBD | Download base URL of sip file| https://ftp.heanet.ie/mirrors/www.apache.org/dist/lucene/solr/ ||
-| hash | install | TBD | The has value of the zip file| 45461fb86851f8615f02dbc89a942fc...af1ca9afbd4f9a631432d6ada58 ||
+| hash | install | TBD | The hash value of the zip file| 45461fb86851f8615f02dbc89a942fc...af1ca9afbd4f9a631432d6ada58 ||
 | logs | install | TBD | Logs directory | C:/solr/logs/ | |
 | data | install | TBD | Data diretcory | C:/solr/data/ | |
 | home | install | TBD | Home diretcory | C:/solr | |
