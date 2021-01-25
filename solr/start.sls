@@ -5,7 +5,7 @@
 
 
 {% set solr_install_dir=  salt['pillar.get']('solr:install_dir', "C:/solr") %}
-{% set solr_index_dir=    salt['pillar.get']('solr:logs',        "C:/solr/index/") %}
+{% set solr_index_dir=    salt['pillar.get']('solr:logs',        "C:/solr/node1/") %}
 {% set solr_port =        salt['pillar.get']('solr:port',        "8000") %}
 
 
