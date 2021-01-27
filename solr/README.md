@@ -5,6 +5,7 @@ Installation and configuration of Apache Solr indexer.
 Solr is a standalone enterprise search server with a REST-like API. You put documents in it (called "indexing") via JSON, XML, CSV or binary over HTTP. You query it via HTTP GET and receive JSON, XML, CSV or binary results. 
 
 Starting hint for automation:
+
     grep "^|.*| install" README.md | awk -F"|" '{print $2":"$6}'
 
 
