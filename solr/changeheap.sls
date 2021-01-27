@@ -4,26 +4,28 @@
 # salt_minion_test: salt-call --local state.show_sls solr
 # salt_minion_run:  salt-call --local state.apply solr.projectconfig
 
-
-{% set solr_install_dir= salt['pillar.get']('solr:install_dir', "C:/solr") %}
-
-{% set heap=      salt['pillar.get']('solr:heap',    "6g") %}
-{% set java_mem=  salt['pillar.get']('solr:java_mem',"6g") %}
+{% from "solr/map.jinja" import solr with context %}
 
 
 change_heap:
   cmd.run:
-    - name: echo set SOLR_HEAP={{heap}} and JAVA MEM of {{java_mem}}
+    - name: echo set SOLR_HEAP={{solr.heap}} and JAVA MEM of {{solr.java_mem}}
+
 
 set_solr_heap:
   file.replace:
-  - name:    {{solr_install_dir}}/bin/solr.cmd
+  - name:    {{solr.install_dir}}/bin/solr.cmd
   - pattern: 'set SOLR_HEAP=%~2'
-  - repl:    'set SOLR_HEAP={{heap}}'
+  - repl:    'set SOLR_HEAP={{solr.heap}}'
+
 
 set_solr_java:
   file.replace:
-  - name:    {{solr_install_dir}}/bin/solr.cmd
+  - name:    {{solr.install_dir}}/bin/solr.cmd
   - pattern: 'SOLR_JAVA_MEM=-Xms512m -Xmx512m'
-  - repl:    'SOLR_JAVA_MEM=-Xms{{java_mem}} -Xmx{{java_mem}}'
+  - repl:    'SOLR_JAVA_MEM=-Xms{{solr.java_mem}} -Xmx{{solr.java_mem}}'
 
+
+test_changeheap_xml:
+  cmd.run:
+    - name: echo Configure the solrconfig.xml with document_cache_size {{solr.document_cache_size}} and document_cache_init {{solr.document_cache_init}} with autowarmCount {{solr.autowarm}}
