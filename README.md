@@ -15,6 +15,34 @@ clone solr
 run salt-call solr
 
 
+# INSTALL
+name:        'solr'
+install_dir: 'c:/solr'
+ver:         '7.7.3'
+url:         'https://ftp.heanet.ie/mirrors/www.apache.org/dist/lucene/solr/'
+hash:        '45461fb86851f8615f02dbc89a942facdd13ab9ca0d984eaf35ec1ed2cef653af738320945749c3130d27d5581a1f0ede34bdaf1ca9afbd4f9a631432d6ada58'
+logs:        'C:/solr/logs'
+data:        'C:/solr/data'
+home:        'C:/solr'
+user:        'solr'
+temp:        'C:/temp'
+
+
+# Memory Tweaks
+heap:        '6g'
+java_mem:    '6g'
+
+# Solrconfig
+document_cache_init: 400000
+document_cache_size: 400000
+autowarm:    0
+
+# Zookeeper
+port:        8993
+index:       'c:/solr/node1'
+node1:       'node1'
+
+
 
 ## Commands
 
