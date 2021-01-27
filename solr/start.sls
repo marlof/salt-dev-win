@@ -1,15 +1,17 @@
 # Setup the solr cloud index
+# salt_test: salt-call --local pillar.data
 # Pillar at the CLI
 # salt_minion_test: salt-call --local state.show_sls solr.start
 # salt_minion_run:  salt-call --local state.apply solr.start
 
-
-{% set solr_install_dir=  salt['pillar.get']('solr:install_dir', "C:/solr") %}
-{% set solr_index_dir=    salt['pillar.get']('solr:logs',        "C:/solr/node1/") %}
-{% set solr_port =        salt['pillar.get']('solr:port',        "8000") %}
+{% from "solr/map.jinja" import solr with context %}
 
 
 solr_start:
   cmd.run:
-    - name: echo Starting {{solr_install_dir}}/bin/solr.cmd on port {{solr_port}} try http://localhost:{{solr_port}}
-    - name: {{solr_install_dir}}/bin/solr.cmd start -cloud -p {{solr_port}} -s {{solr_index_dir}}
+{% if salt['file.directory_exists'](solr.install_dir) and salt['file.directory_exists'](solr.data)    %}
+    - name: echo Starting {{solr.install_dir}}/bin/solr.cmd on port {{solr.port}} try http://localhost:{{solr.port}}
+    - name: echo {{solr.install_dir}}/bin/solr.cmd start -cloud -p {{solr.port}} -s {{solr.index}}
+{% else %}
+    - name: echo Not sure that {{ solr.name }} has been installed yet. Make sure the {{solr.install_dir}} and {{solr.data}} directories exsist.
+{% endif %}
