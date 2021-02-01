@@ -16,12 +16,49 @@
 $saltversion = "Salt-Minion-3002.2-Py3-AMD64-Setup.exe"
 
 $dir_source      = "https://repo.saltstack.com/windows/$saltversion"
-$dir_destination = "c:\salt\exe\"
+$install_dir     = "C:\salt"
+$dir_destination = "$install_dir\exe\"
 $destination     = "$dir_destination$saltversion"
 
-$salt            = "C:\salt\salt-call.bat"
-$testfile        = "C:\salt\uninst.exe"
+$salt            = "$install_dir\salt-call.bat"
+$testfile        = "$install_dir\uninst.exe"
+$formulas_dir    = "$install_dir\srv\formulas"
+
 $computername    = iex hostname
+
+##################################################################################
+# Library Functions Do Not Modify
+function PSCommandPath() { return $PSCommandPath; }
+function ScriptName() { return $MyInvocation.ScriptName; }
+function MyCommandName() { return $MyInvocation.MyCommand.Name; }
+function MyCommandDefinition() {
+    # Begin of MyCommandDefinition()
+    # Note: ouput of this script shows the contents of this function, not the execution result
+    return $MyInvocation.MyCommand.Definition;
+    # End of MyCommandDefinition()
+}
+function MyInvocationPSCommandPath() { return $MyInvocation.PSCommandPath; }
+# Create a Folder Function
+function CreateFolder($path) {
+  $global:foldPath = $null
+  foreach($foldername in $path.split("\")) {
+    $global:foldPath += ($foldername+"\")
+    if (!(Test-Path $global:foldPath)){
+      New-Item -ItemType Directory -Path $global:foldPath
+      Write-Output "$global:foldPath Folder Created Successfully"
+    }
+  }
+}
+# Download from a URL to a destination file
+function GetUrl($src, $dest) { 
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+  Write-Host "Downloading : $src"
+  Write-Host "Target      : $dest"
+  Invoke-WebRequest -Uri $src -OutFile $dest
+}
+##################################################################################
+
+
 clear
 Write-Output "
 Running $(ScriptName)...
@@ -32,6 +69,7 @@ Running $(ScriptName)...
 
 =====================================================================================
 "
+
 
 #==============================================================================
 # Install
@@ -95,29 +133,7 @@ Write-Output "
 
 
 #==============================================================================
-# Create a Folder Function
-#==============================================================================
-Function CreateFolder($path) {
-  $global:foldPath = $null
-  foreach($foldername in $path.split("\")) {
-    $global:foldPath += ($foldername+"\")
-    if (!(Test-Path $global:foldPath)){
-      New-Item -ItemType Directory -Path $global:foldPath
-      Write-Output "$global:foldPath Folder Created Successfully"
-    }
-  }
-}
 
-
-#==============================================================================
-# Download from a URL to a destination file
-#==============================================================================
-Function GetUrl($src, $dest) { 
-  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-  Write-Host "Downloading : $src"
-  Write-Host "Target      : $dest"
-  Invoke-WebRequest -Uri $src -OutFile $dest
-}
 
 
 #==============================================================================
@@ -172,6 +188,7 @@ while (!(Test-Path "$testfile")) {
 }
 
 
+#Start-Sleep -Seconds 5
 
 
 Write-Output "
@@ -184,14 +201,62 @@ Write-Output "
 
     $salt --version
 
- Missing options in c:\salt\conf\minion
+=====================================================================================
+"
+}
+#start-Sleep -Seconds 5
+iex "$salt --version"
+
+Write-Output "
+=====================================================================================
+
+ Missing options in $install_dir\conf\minion
   Add the following....
   x
   y
   z
 =====================================================================================
 "
-}
-iex "$salt --version"
 
-#iex 'c:\temp\Salt-Minion-2015.5.0-AMD64-Setup.exe /S /master=salt-master /minion-name=$env:computername'
+#Start-Sleep -Seconds 5
+
+Write-Output "
+=====================================================================================
+
+ Running winrepo.update_git_repos
+
+=====================================================================================
+"
+iex  "$salt --local winrepo.update_git_repos"
+#iex 'c:\temp\Salt-Minion-2015.5.0-AMD64-Set"up.exe /S /master=salt-master /minion-name=$env:computername'
+
+Write-Output "
+=====================================================================================
+
+    mkdir -p $install_dir\srv\formulas
+    CreateFolder $formulas_dir
+
+    cd /srv/formulas
+    git clone https://github.com/marlof/solr-formula.git
+
+## or
+
+    mkdir -p /srv/formulas
+    cd $formulas_dir
+    wget https://github.com/marlof/solr-formula/archive/main.zip
+    tar xf solr-formula-master.tar.gz
+
+## Add the new directory to file_roots:
+$install_dir
+file_roots:
+  base:
+    - /srv/salt
+    - /srv/formulas/solr
+=====================================================================================
+"
+#  CreateFolder "$dir_destination"
+
+# CreateFolder "$formulas_dir"
+cd $install_dir\srv\salt
+echo "git clone https://github.com/marlof/solr.git"
+git clone https://github.com/marlof/solr.git
