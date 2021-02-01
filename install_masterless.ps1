@@ -141,7 +141,7 @@ If (($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
       Check md5.
 "
   } Else {
-    GetUrl  $source $destination
+    GetUrl  $dir_source $destination
     Write-Output "  $destination /S /master=localhost /minion-name=%COMPUTERNAME%"
   }
 
