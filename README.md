@@ -8,15 +8,13 @@ Run %HOME% / Downloads/Salt-Minion-3002.2-Py3-AMD64-Setup.exe
 
 # Clean slate
 
-remove c:\solr
-
-remove c:\salt
-
-run salt.ps1
+remove c:\solr, remove c:\salt, run salt.ps1
 
 clone solr
 
 run salt-call solr
+
+salt-call --local state.apply solr 
 
 
 # INSTALL
