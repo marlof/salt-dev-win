@@ -70,6 +70,8 @@ salt-call state.sls mssql -l debug
 
 salt-call saltutil.sync_all
 
+salt-call saltutil.clear_cache
+
 salt-call sys.doc saltutil | more
 
 salt-call sys.doc myutil
