@@ -55,33 +55,42 @@ salt-call --local cmd.run $REPO'\'$MSSQL_VERSION' /ConfigurationFile='$DIR_CONFI
 salt-call cmd.run 'C:\salt\fake_repo\exes\SQLOffline\Setup.exe /QS /IACCEPTSQLSERVERLICENSETERMS /SQLSVCPASSWORD="changeme" /ConfigurationFile=C:\salt\fake_repo\config\mssqltest2.ini'
 
 
-# CMD
+### CMD
 salt-call cmd.run 'dir'
+
 salt-call cmd.run template=jinja 'echo {{grains}}'
+
 salt-call cmd.run template=jinja 'echo {{grains.id}}'
 
-# Grains
+### Grains
 salt-call grains.items
+
 salt-call --local grains.items | more
+
 salt-call grains.get locale_info:defaultlanguage
+
 salt-call grains.get locale_info
 
-# PKG
+### PKG
 salt-call pkg.refresh_db
 
 salt-call cp.list_master | more
 
 salt-call state.sls mssql -l debug
+
 salt-call state.show_sls mssql
 
-# SALTUTIL
+### SALTUTIL
 salt-call saltutil.sync_all
+
 salt-call saltutil.clear_cache
 
 salt-call sys.doc saltutil | more
+
 salt-call sys.doc myutil
 
 salt-call network.netstat
+
 salt-call network.ip_addrs
 
 
